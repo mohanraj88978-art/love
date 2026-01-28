@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Sherin | Love Kavithai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .name-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.7);
+            margin-bottom: 10px;
+            animation: glow 3s infinite alternate;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a3d9ff;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        /* Floating Petals Background */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .petal {
+            position: absolute;
+            background: rgba(255, 182, 193, 0.7);
+            border-radius: 50% 50% 50% 0;
+            opacity: 0.7;
+            animation: floatDown linear infinite;
+        }
+        
+        /* Heart Animation Container */
+        .heart-animation-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .pulsing-heart {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: #ff3366;
+            transform: rotate(45deg);
+            animation: heartbeat 1.2s infinite;
+            box-shadow: 0 0 40px rgba(255, 51, 102, 0.8);
+        }
+        
+        .pulsing-heart:before,
+        .pulsing-heart:after {
+            content: "";
+            width: 150px;
+            height: 150px;
+            background-color: #ff3366;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .pulsing-heart:before {
+            top: -75px;
+            left: 0;
+        }
+        
+        .pulsing-heart:after {
+            top: 0;
+            left: -75px;
+        }
+        
+        .heart-text {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        /* Kavithai Sections */
+        .kavithai-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .kavithai-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kavithai-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .kavithai-card:nth-child(even) {
+            background: rgba(163, 217, 255, 0.1);
+        }
+        
+        .kavithai-card:nth-child(even):hover {
+            background: rgba(163, 217, 255, 0.15);
+        }
+        
+        .kavithai-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffccdd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 204, 221, 0.3);
+        }
+        
+        .kavithai-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #f0f0f0;
+            font-style: italic;
+            text-align: justify;
+        }
+        
+        .kavithai-text .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        /* Floating Letters Animation */
+        .letters-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .floating-letter {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: rgba(255, 107, 157, 0.7);
+            font-weight: bold;
+            animation: floatAround 20s linear infinite;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px;
+            color: #a3d9ff;
+            font-size: 1.1rem;
+            border-top: 1px solid rgba(163, 217, 255, 0.2);
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff6b9d;
+            margin-top: 10px;
+        }
+        
+        /* Animations */
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 107, 157, 0.7); }
+            100% { text-shadow: 0 0 30px rgba(255, 107, 157, 1), 0 0 40px rgba(255, 107, 157, 0.7); }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); }
+            100% { text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 107, 157, 0.7); }
+        }
+        
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(calc(100vw * var(--tx)), calc(100vh * var(--ty))) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .name-title { font-size: 3.5rem; }
+            .heart-container { width: 250px; height: 250px; }
+            .pulsing-heart { width: 120px; height: 120px; }
+            .pulsing-heart:before, .pulsing-heart:after { width: 120px; height: 120px; }
+            .pulsing-heart:before { top: -60px; }
+            .pulsing-heart:after { left: -60px; }
+            .heart-text { font-size: 2rem; }
+            .kavithai-container { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .name-title { font-size: 2.8rem; }
+            .subtitle { font-size: 1.2rem; }
+            .kavithai-card { padding: 20px; }
+            .kavithai-title { font-size: 1.5rem; }
+            .kavithai-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+    
+    <!-- Floating Letters -->
+    <div class="letters-container" id="lettersContainer"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="name-title">For My Sherin</h1>
+            <p class="subtitle">A collection of love kavithai, woven with eternal affection</p>
+        </header>
+        
+        <!-- Heart Animation Section -->
+        <section class="heart-animation-section">
+            <div class="heart-container">
+                <div class="pulsing-heart"></div>
+                <div class="heart-text">Sherin<br>My Heart Beats For You</div>
+            </div>
+        </section>
+        
+        <!-- Kavithai Sections -->
+        <section class="kavithai-container">
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">The First Whisper</h2>
+                <p class="kavithai-text">
+                    In the garden of my soul, a flower named <span class="highlight">Sherin</span> bloomed,<br>
+                    Coloring my world where darkness once loomed.<br>
+                    Your laughter, a melody so sweet and clear,<br>
+                    Banishing every shadow, every fear.<br>
+                    With you, my love, life feels so complete,<br>
+                    My heart finds its home, its rhythm, its beat.
+                </p>
+            </div>
+            
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">Eternal Connection</h2>
+                <p class="kavithai-text">
+                    Two stars in the vast cosmic sea,<br>
+                    Destined together, you and me.<br>
+                    <span class="highlight">Sherin</span>, your name echoes in my mind,<br>
+                    A beautiful treasure, one of a kind.<br>
+                    Across lifetimes, my soul would seek,<br>
+                    The love in your eyes, the words you speak.
+                </p>
+            </div>
+            
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">Morning Promise</h2>
+                <p class="kavithai-text">
+                    As dawn breaks with golden light,<br>
+                    I promise to hold you, day and night.<br>
+                    My <span class="highlight">Sherin</span>, with eyes like morning dew,<br>
+                    My love for you is forever true.<br>
+                    Through every season, come what may,<br>
+                    Beside you I'll forever stay.
+                </p>
+            </div>
+            
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">Ocean of Emotions</h2>
+                <p class="kavithai-text">
+                    My love for you is an ocean deep,<br>
+                    Promises my soul will always keep.<br>
+                    <span class="highlight">Sherin</span>, you're the shore where I find peace,<br>
+                    Where all my worries and anxieties cease.<br>
+                    In your embrace, I've found my home,<br>
+                    No longer through life's storms alone.
+                </p>
+            </div>
+            
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">Timeless Bond</h2>
+                <p class="kavithai-text">
+                    Not just for now, but for always and forever,<br>
+                    A bond that nothing can sever.<br>
+                    My <span class="highlight">Sherin</span>, my moon, my guiding star,<br>
+                    No matter near or afar.<br>
+                    Written in destiny, etched in time,<br>
+                    This love for you will always be mine.
+                </p>
+            </div>
+            
+            <div class="kavithai-card">
+                <h2 class="kavithai-title">Whispers of the Heart</h2>
+                <p class="kavithai-text">
+                    If every heartbeat had a voice to speak,<br>
+                    It would whisper "<span class="highlight">Sherin</span>" gentle and meek.<br>
+                    If every star in the night sky above,<br>
+                    Could carry a message of my endless love.<br>
+                    The universe itself would sing your name,<br>
+                    In the eternal, passionate flame.
+                </p>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>Every word, every line, every rhythm is dedicated to you</p>
+            <p class="signature">With All My Love</p>
+            <p></p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating petals
+        const petalsContainer = document.getElementById('petalsContainer');
+        
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            // Random size
+            const size = Math.random() * 20 + 10;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            
+            // Random color variation
+            const colorVariation = Math.random();
+            if (colorVariation < 0.3) {
+                petal.style.background = 'rgba(255, 182, 193, 0.8)'; // Light pink
+            } else if (colorVariation < 0.6) {
+                petal.style.background = 'rgba(255, 105, 180, 0.7)'; // Hot pink
+            } else {
+                petal.style.background = 'rgba(255, 20, 147, 0.6)'; // Deep pink
+            }
+            
+            // Random starting position
+            const startX = Math.random() * 100;
+            petal.style.left = `${startX}vw`;
+            
+            // Random animation duration
+            const duration = Math.random() * 15 + 10;
+            petal.style.animationDuration = `${duration}s`;
+            
+            // Random animation delay
+            const delay = Math.random() * 5;
+            petal.style.animationDelay = `${delay}s`;
+            
+            petalsContainer.appendChild(petal);
+            
+            // Remove petal after animation completes
+            setTimeout(() => {
+                if (petal.parentElement) {
+                    petal.remove();
+                }
+            }, (duration + delay) * 1000);
+        }
+        
+        // Create initial petals
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => createPetal(), i * 300);
+        }
+        
+        // Keep creating petals
+        setInterval(createPetal, 500);
+        
+        // Create floating letters for "SHERIN"
+        const lettersContainer = document.getElementById('lettersContainer');
+        const sherinLetters = ['S', 'H', 'E', 'R', 'I', 'N', '♥', 'S', 'H', 'E', 'R', 'I', 'N', '♥'];
+        
+        function createFloatingLetter(letter) {
+            const letterElement = document.createElement('div');
+            letterElement.classList.add('floating-letter');
+            letterElement.textContent = letter;
+            
+            // Random starting position
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            letterElement.style.left = `${startX}vw`;
+            letterElement.style.top = `${startY}vh`;
+            
+            // Random animation variables
+            const tx = Math.random() * 2 - 1;
+            const ty = Math.random() * 2 - 1;
+            letterElement.style.setProperty('--tx', tx);
+            letterElement.style.setProperty('--ty', ty);
+            
+            // Random size
+            const size = Math.random() * 30 + 20;
+            letterElement.style.fontSize = `${size}px`;
+            
+            // Random color
+            const colors = ['#ff6b9d', '#ffcc00', '#a3d9ff', '#ff3366', '#cc99ff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            letterElement.style.color = color;
+            
+            // Random animation duration
+            const duration = Math.random() * 30 + 20;
+            letterElement.style.animationDuration = `${duration}s`;
+            
+            lettersContainer.appendChild(letterElement);
+            
+            // Remove letter after animation
+            setTimeout(() => {
+                if (letterElement.parentElement) {
+                    letterElement.remove();
+                }
+            }, duration * 1000);
+        }
+        
+        // Create floating letters
+        for (let i = 0; i < sherinLetters.length; i++) {
+            setTimeout(() => {
+                createFloatingLetter(sherinLetters[i]);
+            }, i * 1000);
+        }
+        
+        // Keep creating letters
+        setInterval(() => {
+            const randomLetter = sherinLetters[Math.floor(Math.random() * sherinLetters.length)];
+            createFloatingLetter(randomLetter);
+        }, 2000);
+        
+        // Interactive heart effect
+        const pulsingHeart = document.querySelector('.pulsing-heart');
+        
+        pulsingHeart.addEventListener('click', function() {
+            // Create heart burst effect
+            createHeartBurst();
+            
+            // Change heart color temporarily
+            const originalColor = this.style.backgroundColor;
+            this.style.backgroundColor = '#ffcc00';
+            this.style.boxShadow = '0 0 50px rgba(255, 204, 0, 0.9)';
+            
+            setTimeout(() => {
+                this.style.backgroundColor = originalColor;
+                this.style.boxShadow = '0 0 40px rgba(255, 51, 102, 0.8)';
+            }, 500);
+        });
+        
+        function createHeartBurst() {
+            const burstContainer = document.createElement('div');
+            burstContainer.style.position = 'fixed';
+            burstContainer.style.top = '50%';
+            burstContainer.style.left = '50%';
+            burstContainer.style.transform = 'translate(-50%, -50%)';
+            burstContainer.style.pointerEvents = 'none';
+            burstContainer.style.zIndex = '1000';
+            
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '♥';
+                heart.style.position = 'absolute';
+                heart.style.color = '#ff6b9d';
+                heart.style.fontSize = '25px';
+                
+                // Calculate angle for each heart
+                const angle = (i / 18) * 2 * Math.PI;
+                const distance = 120;
+                
+                // Animate heart
+                heart.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1)', 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 1200,
+                    easing: 'ease-out'
+                });
+                
+                burstContainer.appendChild(heart);
+            }
+            
+            document.body.appendChild(burstContainer);
+            
+            // Remove container after animation
+            setTimeout(() => {
+                burstContainer.remove();
+            }, 1200);
+        }
+        
+        // Add scroll effect to kavithai cards
+        const kavithaiCards = document.querySelectorAll('.kavithai-card');
+        
+        function checkScroll() {
+            kavithaiCards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.85) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initial check
+        checkScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+        
+        // Add keyboard interaction
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'S' || event.key === 's') {
+                // Create special effect when 'S' is pressed
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => createFloatingLetter('S'), i * 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
